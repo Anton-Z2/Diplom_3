@@ -19,7 +19,6 @@ public class UserLoginTest {
     private WebDriver driver;
     private User user;
     private final UserClient client = new UserClient();
-    private final UserGenerator userGenerator = new UserGenerator();
     private String accessToken;
 
     @Before
@@ -34,7 +33,7 @@ public class UserLoginTest {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-        user = userGenerator.generateUser();
+        user = UserGenerator.generateUser();
         ValidatableResponse response = client.createUser(user);
         accessToken = response.extract().jsonPath().getString("accessToken");
     }
